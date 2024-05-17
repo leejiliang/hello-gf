@@ -1,0 +1,14 @@
+###
+# @name hello
+# @no-log
+GET {{host}}/say
+
+###
+# @name 添加用户
+# @no-log
+GET {{host}}/user/add-user
+
+###
+# @name 删除用户
+# @no-log
+DELETE {{host}}/user/del-user
