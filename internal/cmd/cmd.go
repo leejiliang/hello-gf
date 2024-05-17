@@ -2,12 +2,11 @@ package cmd
 
 import (
 	"context"
+	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
+	"github.com/gogf/gf/v2/os/gcmd"
 	"hello-gf/internal/controller/hello"
 	"hello-gf/internal/controller/user"
-
-	"github.com/gogf/gf/v2/frame/g"
-	"github.com/gogf/gf/v2/os/gcmd"
 )
 
 func gf2(req *ghttp.Request) {
@@ -23,14 +22,14 @@ var (
 			s := g.Server()
 
 			// 路由注册
-			s.BindHandler("/my-hello", func(req *ghttp.Request) {
-				req.Response.Write("hello GF")
-			})
+			//s.BindHandler("/my-hello", func(req *ghttp.Request) {
+			//	req.Response.Write("hello GF")
+			//})
 
-			s.BindHandler("/my-hello2", gf2)
+			//s.BindHandler("/my-hello2", gf2)
 
-			hello := hello.NewHello()
-			s.BindHandler("GET:/say", hello.SayHello)
+			//hello := hello.NewHello()
+			//s.BindHandler("GET:/say", hello.SayHello)
 
 			// 批量绑定所有controller中的方法
 			//s.BindObject("/user", user.New())
@@ -39,13 +38,18 @@ var (
 			// 绑定某一个方法
 			//s.BindObjectMethod("/user/query", user.New(), "QueryUser")
 			// 根据Rest规范来选择绑定方法, 例如： GET POST PUT DELETE 方法名需要固定
-			s.BindObjectRest("/user", user.New())
-			//s.Group("/", func(group *ghttp.RouterGroup) {
-			//	group.Middleware(ghttp.MiddlewareHandlerResponse)
-			//	group.Bind(
-			//		hello.NewV1(),
-			//	)
-			//})
+			//s.BindObjectRest("/user", user.New())
+			s.Group("/user", func(group *ghttp.RouterGroup) {
+				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				// 分组嵌套
+				group.Group("/inner-user", func(innerGroup *ghttp.RouterGroup) {
+					innerGroup.Bind(hello.NewHello())
+				})
+				group.Bind(
+					user.New(),
+					//hello.NewHello(),
+				)
+			})
 			s.Run()
 			return nil
 		},
