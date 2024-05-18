@@ -31,3 +31,14 @@ Content-Type: application/x-www-form-urlencoded
 
 username = zhangsan1111 &
 password = 123456111aa
+
+###
+# @no-log
+# @name  获取form数据参数
+PUT {{host}}:58660/user/inner-user/params
+Content-Type: application/json
+
+{
+  "username": "王老五",
+  "password": "zhangxueyou"
+}
