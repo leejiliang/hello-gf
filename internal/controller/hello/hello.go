@@ -28,8 +28,9 @@ func (c *Hello) Params(ctx context.Context, req *hello.ParamsReq) (res *hello.Pa
 	//name := r.GetQuery("name", "李四") //李四表示默认值
 	//queryMap := r.GetQueryMap()
 	//queryMap := r.GetQueryMap(map[string]interface{}{"name": "李四"}) //只获取指定的参数值, 没传name时, 用李四作为默认值
-	queryMap := r.GetQueryMap(g.Map{"name": "李四"}) //map的简写方式, 只获取指定的参数值, 没传name时, 用李四作为默认值
+	//queryMap := r.GetQueryMap(g.Map{"name": "李四"}) //map的简写方式, 只获取指定的参数值, 没传name时, 用李四作为默认值
+	username := r.GetForm("username")
 	r.GetQueryMap()
-	r.Response.Writeln(queryMap) //拼接之前需要转换
+	r.Response.Writeln(username) //拼接之前需要转换
 	return
 }
