@@ -26,8 +26,8 @@ GET {{host}}:52875/user/inner-user/params?name=zhangsan&age=10
 ###
 # @no-log
 # @name  获取form数据参数
-PUT {{host}}:54714/user/inner-user/params
+PUT {{host}}:58081/user/inner-user/params
 Content-Type: application/x-www-form-urlencoded
 
 username = zhangsan1111 &
-password = 123456
+password = 123456111aa
