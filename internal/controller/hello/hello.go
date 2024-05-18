@@ -4,7 +4,12 @@
 
 package hello
 
-import "github.com/gogf/gf/v2/net/ghttp"
+import (
+	"context"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/net/ghttp"
+	"hello-gf/api/hello"
+)
 
 type Hello struct {
 	msg string
@@ -16,4 +21,15 @@ func NewHello() *Hello {
 
 func (c *Hello) SayHello(req *ghttp.Request) {
 	req.Response.Writeln(" Hello Go Frame")
+}
+
+func (c *Hello) Params(ctx context.Context, req *hello.ParamsReq) (res *hello.ParamsRes, err error) {
+	r := g.RequestFromCtx(ctx)
+	//name := r.GetQuery("name", "李四") //李四表示默认值
+	//queryMap := r.GetQueryMap()
+	//queryMap := r.GetQueryMap(map[string]interface{}{"name": "李四"}) //只获取指定的参数值, 没传name时, 用李四作为默认值
+	queryMap := r.GetQueryMap(g.Map{"name": "李四"}) //map的简写方式, 只获取指定的参数值, 没传name时, 用李四作为默认值
+	r.GetQueryMap()
+	r.Response.Writeln(queryMap) //拼接之前需要转换
+	return
 }

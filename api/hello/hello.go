@@ -1,17 +1,13 @@
 // =================================================================================
-// Code generated and maintained by GoFrame CLI tool. DO NOT EDIT. 
+// Code generated and maintained by GoFrame CLI tool. DO NOT EDIT.
 // =================================================================================
 
 package hello
 
-import (
-	"context"
-	
-	"hello-gf/api/hello/v1"
-)
+import "github.com/gogf/gf/v2/frame/g"
 
-type IHelloV1 interface {
-	Hello(ctx context.Context, req *v1.HelloReq) (res *v1.HelloRes, err error)
+type ParamsReq struct {
+	g.Meta `method: "all" `
 }
 
-
+type ParamsRes struct {}
