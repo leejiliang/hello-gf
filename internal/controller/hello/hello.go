@@ -6,6 +6,7 @@ package hello
 
 import (
 	"context"
+	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"hello-gf/api/hello"
@@ -72,5 +73,6 @@ func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.
 		Age:      122,
 	}
 	//r.Response.Write(req) // Content-Type: text/plain; charset=utf-8
+	err = gerror.New("服务器GG")
 	return
 }
