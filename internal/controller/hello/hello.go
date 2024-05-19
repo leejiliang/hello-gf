@@ -60,9 +60,12 @@ func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.
 	//r.Response.Writeln("Hello Go Frame1")
 	//r.Response.Write("Hello Go Frame2")
 
-	r.Response.Writeln("<h1>Hello Go Frame1</h2>")
-	r.Response.Write("<h2>Hello Go Frame2</h2>")
-	r.Response.WriteExit("<h2>Hello Go Frame exit</h2>")
-	r.Response.Writef("<h2>Hello Go Frame3 name is %s , age is %d</h2>", req.Username, req.Age)
+	//r.Response.Writeln("<h1>Hello Go Frame1</h2>")
+	//r.Response.Write("<h2>Hello Go Frame2</h2>")
+	//r.Response.WriteExit("<h2>Hello Go Frame exit</h2>")
+	//r.Response.Writef("<h2>Hello Go Frame3 name is %s , age is %d</h2>", req.Username, req.Age)
+
+	//r.Response.WriteJson(req) // 返回信息: Content-Type: application/json,
+	r.Response.Write(req) // Content-Type: text/plain; charset=utf-8
 	return
 }
