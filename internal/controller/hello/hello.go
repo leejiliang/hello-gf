@@ -32,17 +32,19 @@ func (c *Hello) Params(ctx context.Context, req *hello.ParamsReq) (res *hello.Pa
 	//username := r.GetForm("username")
 	//formMap := r.GetFormMap() // 获取整个表单
 	// 转换成结构体测试
-	type person struct {
-		Username string
-		Password string
-	}
-	var u person
-	err = r.ParseForm(&u) // 注意这里是pointer, 不要直接传对象.
-	if err == nil {
-		//r.GetQueryMap()
-		r.Response.Writeln(u) //拼接之前需要转换
-
-	}
-	//r.Response.Writeln(formMap) //拼接之前需要转换
+	//type person struct {
+	//	Username string
+	//	Password string
+	//}
+	//var u person
+	//err = r.ParseForm(&u) // 注意这里是pointer, 不要直接传对象.
+	//if err == nil {
+	//	//r.GetQueryMap()
+	//	r.Response.Writeln(u) //拼接之前需要转换
+	//
+	//}
+	//name := r.GetRouter("name")
+	routeMap := r.GetRouterMap()
+	r.Response.Writeln(routeMap) //拼接之前需要转换
 	return
 }
