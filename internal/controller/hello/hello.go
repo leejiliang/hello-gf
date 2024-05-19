@@ -44,7 +44,9 @@ func (c *Hello) Params(ctx context.Context, req *hello.ParamsReq) (res *hello.Pa
 	//
 	//}
 	//name := r.GetRouter("name")
-	routeMap := r.GetRouterMap()
-	r.Response.Writeln(routeMap) //拼接之前需要转换
+	//routeMap := r.GetRouterMap()
+	//reqMap := r.GetRequestMap()
+	reqMap := r.Get("name")
+	r.Response.Writeln(reqMap) //拼接之前需要转换
 	return
 }
