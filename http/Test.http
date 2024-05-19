@@ -39,7 +39,6 @@ PUT {{host}}/user/inner-user/params
 Content-Type: application/json
 
 {
-  "name": "zhangsan3",
-  "username": "王老五",
+  "name": "王老五",
   "password": "zhangxueyou"
 }
