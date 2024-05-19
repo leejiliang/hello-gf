@@ -35,7 +35,7 @@ password = 123456111aa
 ###
 # @no-log≠≠≠
 # @name  获取form数据参数
-PUT {{host}}/user/inner-user/params/zhangsan?name=zhangsan2
+PUT {{host}}/user/inner-user/params
 Content-Type: application/json
 
 {
