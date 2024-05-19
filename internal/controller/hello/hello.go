@@ -52,3 +52,15 @@ func (c *Hello) Params(ctx context.Context, req *hello.ParamsReq) (res *hello.Pa
 
 	return
 }
+
+func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.ParamsRes, err error) {
+	r := g.RequestFromCtx(ctx)
+	//r.Response.Writeln(req) //拼接之前需要转换
+
+	//r.Response.Writeln("Hello Go Frame1")
+	//r.Response.Write("Hello Go Frame2")
+
+	r.Response.Writeln("<h1>Hello Go Frame1</h2>")
+	r.Response.Write("<h2>Hello Go Frame2</h2>")
+	return
+}

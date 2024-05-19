@@ -42,3 +42,14 @@ Content-Type: application/json
   "name": "王老五",
   "password": "zhangxueyou"
 }
+
+###
+# @no-log≠≠≠
+# @name  测试相应
+PUT {{host}}/user/inner-user/response
+Content-Type: application/json
+
+{
+  "name": "王老五",
+  "password": "zhangxueyou"
+}
