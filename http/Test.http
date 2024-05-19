@@ -53,3 +53,9 @@ Content-Type: application/json
   "name": "王老五",
   "password": "zhangxueyou"
 }
+
+
+###
+# @name 查询数据库
+# @no-log
+GET {{host}}/user/inner-user/db

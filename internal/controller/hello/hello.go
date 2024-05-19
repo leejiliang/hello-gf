@@ -76,3 +76,7 @@ func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.
 	err = gerror.New("服务器GG")
 	return
 }
+
+func (c *Hello) Db(req *ghttp.Request) {
+	req.Response.Writeln(g.Model("book"))
+}
