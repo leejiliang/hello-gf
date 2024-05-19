@@ -62,6 +62,7 @@ func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.
 
 	r.Response.Writeln("<h1>Hello Go Frame1</h2>")
 	r.Response.Write("<h2>Hello Go Frame2</h2>")
+	r.Response.WriteExit("<h2>Hello Go Frame exit</h2>")
 	r.Response.Writef("<h2>Hello Go Frame3 name is %s , age is %d</h2>", req.Username, req.Age)
 	return
 }
