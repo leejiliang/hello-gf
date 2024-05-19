@@ -54,7 +54,7 @@ func (c *Hello) Params(ctx context.Context, req *hello.ParamsReq) (res *hello.Pa
 }
 
 func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.ParamsRes, err error) {
-	r := g.RequestFromCtx(ctx)
+	//r := g.RequestFromCtx(ctx)
 	//r.Response.Writeln(req) //拼接之前需要转换
 
 	//r.Response.Writeln("Hello Go Frame1")
@@ -66,6 +66,11 @@ func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.
 	//r.Response.Writef("<h2>Hello Go Frame3 name is %s , age is %d</h2>", req.Username, req.Age)
 
 	//r.Response.WriteJson(req) // 返回信息: Content-Type: application/json,
-	r.Response.Write(req) // Content-Type: text/plain; charset=utf-8
+	res = &hello.ParamsRes{
+		Username: "winston",
+		Password: "123456a",
+		Age:      122,
+	}
+	//r.Response.Write(req) // Content-Type: text/plain; charset=utf-8
 	return
 }

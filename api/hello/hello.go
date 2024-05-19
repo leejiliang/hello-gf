@@ -14,4 +14,8 @@ type ParamsReq struct {
 	Age int
 }
 
-type ParamsRes struct {}
+type ParamsRes struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Age int `json:"age"`
+}
