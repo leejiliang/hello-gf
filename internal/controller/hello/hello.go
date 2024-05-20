@@ -12,6 +12,7 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 	"hello-gf/api/hello"
 	"hello-gf/internal/dao"
+	"hello-gf/internal/model/do"
 )
 
 type Hello struct {
@@ -204,11 +205,21 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//	req.Response.Write("错误信息:" + err.Error())
 	//}
 	ctx := dao.Book.Ctx(req.Context())
-	ctx = ctx.WhereGTE("id", 1)
-	ctx = ctx.WhereLTE("id", 3)
-	all, err := ctx.All()
-	if err == nil {
-		req.Response.Writeln(all)
+	//ctx = ctx.WhereGTE("id", 1)
+	//ctx = ctx.WhereLTE("id", 3)
+	//all, err := ctx.All()
+	//if err == nil {
+	//	req.Response.Writeln(all)
+	//} else {
+	//	req.Response.Write(err)
+	//}
+	//book := entity.Book{Author: "猫腻", Price: 20000} // 其他属性如果不给值，会使用默认值， 如果更新数据库会导致数据库
+	book := do.Book{Price: 300}
+	//其他字段被更新为默认值。
+	//result, err := ctx.Where("id", 1).Fields("author,price").Data(book).Update() // 只更新部分字段
+	result, err := ctx.Where(do.Book{Id: 1}).Data(book).Update() // do就不用指定具体字段
+	if err != nil {
+		req.Response.Write(result)
 	} else {
 		req.Response.Write(err)
 	}
