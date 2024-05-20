@@ -99,7 +99,16 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//all, err := model.WhereIn("id", g.Array{3, 4, 5}).WhereOr("id", 1).All()
 	//all, err := model.Order("id", "DESC").OrderAsc("price").Group("name").All()
 	//all, err := model.Limit(3, 2).All()
-
+	var data = g.Map{
+		"price":        450.2,
+		"publish_time": "2024-05-20",
+	}
+	//result, err := model.Where(g.Map{
+	//	"author": "无名大侠",
+	//}).Data(data).Update()
+	result, err := model.Where(g.Map{
+		"author": "无名大侠",
+	}).Update(data)
 	type Book struct {
 		Id          int
 		BookName    string `orm:"name"` //orm 标签用于映射类型属性和数据库字段名
@@ -115,14 +124,14 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//	"price":        200,
 	//	"publish_time": "2024-01-03",
 	//}
-	data := Book{
-		//"id":           9,
-		BookName: "go入门实战aa",
-		Author:   "无名大侠",
-		Price:    1.0,
-		//PublishTime:     gtime.Now(),
-		PublishTime: gtime.New("2023-09-09"),
-	}
+	//data := Book{
+	//	//"id":           9,
+	//	BookName: "go入门实战aa",
+	//	Author:   "无名大侠",
+	//	Price:    1.0,
+	//	//PublishTime:     gtime.Now(),
+	//	PublishTime: gtime.New("2023-09-09"),
+	//}
 	//var books = g.Array{
 	//	Book{
 	//		BookName: "go入门实战aa1",
@@ -143,7 +152,7 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//result, err := model.Replace(data)
 	//result, err := model.Insert(data)
 	//result, err := model.Save(books)
-	result, err := model.InsertAndGetId(data)
+	//result, err := model.InsertAndGetId(data)
 
 	//var book *Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
 	//var book []Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
