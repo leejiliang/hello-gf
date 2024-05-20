@@ -79,10 +79,25 @@ func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.
 
 func (c *Hello) Db(req *ghttp.Request) {
 	//req.Response.Writeln(g.Model("book"))
-	model := g.Model("book")
-	record, err := model.One()
+	//model := g.Model("book")
+	//record, err := model.One()
+	//record, err := model.Fields("id,name").All()
+	//record, err := model.Fields("id", "name").All()
+	//record, err := model.FieldsEx("id", "name").All()
+	//record, err := model.Value("name") // 表示一条数据的一个具体字段值
+	//record, err := model.Array("name") // 表示查询某一列数据的全部值
+	min, err := g.Model("book").Min("price")
+	max, err := g.Model("book").Max("price")
+	avg, err := g.Model("book").Avg("price")
+	count, err := g.Model("book").Count()
 	if err == nil {
 		//req.Response.Writeln(record["name"])
-		req.Response.Writeln(record["price"].Float64() + 100)
+		req.Response.Writeln(g.Map{
+			"min":   min,
+			"max":   max,
+			"avg":   avg,
+			"count": count,
+		})
+		//req.Response.Writeln(record[0]["name"])
 	}
 }
