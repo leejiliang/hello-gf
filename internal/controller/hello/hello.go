@@ -78,5 +78,11 @@ func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.
 }
 
 func (c *Hello) Db(req *ghttp.Request) {
-	req.Response.Writeln(g.Model("book"))
+	//req.Response.Writeln(g.Model("book"))
+	model := g.Model("book")
+	record, err := model.One()
+	if err == nil {
+		//req.Response.Writeln(record["name"])
+		req.Response.Writeln(record["price"].Float64() + 100)
+	}
 }

@@ -56,6 +56,6 @@ Content-Type: application/json
 
 
 ###
-# @name 查询数据库
+# @name 查询数据库查询
 # @no-log
 GET {{host}}/user/inner-user/db
