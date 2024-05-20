@@ -69,3 +69,9 @@ GET {{host}}/user/inner-user/join-test
 # @name 一对多连表查询
 # @no-log
 GET {{host}}/user/inner-user/one-to-many
+
+
+###
+# @name 查询图书列表
+# @no-log
+GET {{host}}/user/inner-user/get-book-list

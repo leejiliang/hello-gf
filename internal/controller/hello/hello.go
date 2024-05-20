@@ -14,6 +14,7 @@ import (
 	"hello-gf/internal/dao"
 	"hello-gf/internal/model/do"
 	"hello-gf/internal/model/entity"
+	"hello-gf/internal/service"
 )
 
 type Hello struct {
@@ -253,4 +254,14 @@ func (c *Hello) OneToMany(req *ghttp.Request) {
 	} else {
 		req.Response.Writeln(err)
 	}
+}
+
+func (c *Hello) GetBookList(req *ghttp.Request) {
+	list, err := service.Book().GetList(req.Context())
+	if err == nil {
+		req.Response.WriteJson(list)
+	} else {
+		req.Response.Writeln(err)
+	}
+	return
 }
