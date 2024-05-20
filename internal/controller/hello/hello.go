@@ -107,13 +107,23 @@ func (c *Hello) Db(req *ghttp.Request) {
 		Price       float32
 		PublishTime *gtime.Time
 	}
+
+	data := g.Map{
+		"name":         "go入门实战2",
+		"author":       "无名大侠",
+		"price":        200,
+		"publish_time": "2024-01-03",
+	}
+	//result, err := model.Data(data).Insert()
+	result, err := model.Insert(data)
+
 	//var book *Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
-	var book []Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
+	//var book []Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
 	//var book Book // 非指针类型, 查询不到数据时， error会为： sql: no rows in result set
 	//all, err := model.Page(1, 2).All()
-	err := model.Scan(&book)
+	//err := model.Scan(&book)
 	if err == nil {
-		req.Response.WriteJson(book)
+		req.Response.WriteJson(result)
 		//req.Response.Writeln(record["name"])
 		//req.Response.Writeln(g.Map{
 		//	"min":   min,
