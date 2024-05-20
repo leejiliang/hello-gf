@@ -13,6 +13,7 @@ import (
 	"hello-gf/api/hello"
 	"hello-gf/internal/dao"
 	"hello-gf/internal/model/do"
+	"hello-gf/internal/model/entity"
 )
 
 type Hello struct {
@@ -222,5 +223,34 @@ func (c *Hello) Db(req *ghttp.Request) {
 		req.Response.Write(result)
 	} else {
 		req.Response.Write(err)
+	}
+}
+
+func (c *Hello) JoinTest(req *ghttp.Request) {
+	empMd := dao.Emp.Ctx(req.Context())
+	var emps []entity.Emp
+	//err := empMd.Scan(&emps)
+	err := empMd.With(entity.Dept{}).Scan(&emps) // with 表示连接dept
+	if err == nil {
+		req.Response.Writeln(emps)
+	} else {
+		req.Response.Writeln(err)
+	}
+}
+
+func (c *Hello) OneToMany(req *ghttp.Request) {
+	type myDept struct {
+		g.Meta `orm:"table:dept"`
+		Id     uint   `json:"id"`
+		Name   string `json:"name"`
+	}
+	empMd := dao.Dept.Ctx(req.Context())
+	var depts []entity.Dept
+	err := empMd.With(entity.Emp{}).Scan(&depts) // with 表示连接dept
+
+	if err == nil {
+		req.Response.WriteJson(depts)
+	} else {
+		req.Response.Writeln(err)
 	}
 }

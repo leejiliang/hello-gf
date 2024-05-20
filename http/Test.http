@@ -59,3 +59,13 @@ Content-Type: application/json
 # @name 查询数据库查询
 # @no-log
 GET {{host}}/user/inner-user/db
+
+###
+# @name 连表查询测试
+# @no-log
+GET {{host}}/user/inner-user/join-test
+
+###
+# @name 一对多连表查询
+# @no-log
+GET {{host}}/user/inner-user/one-to-many

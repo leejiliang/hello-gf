@@ -11,4 +11,5 @@ type Dept struct {
 	Name   string `json:"name"   orm:"name"   ` // 部门名称
 	Leader string `json:"leader" orm:"leader" ` // 部门领导
 	Phone  string `json:"phone"  orm:"phone"  ` // 联系电话
+	Emps []Emp		`json:"emps" orm:"with:dept_id=id"` // 员工, 当前表的id放在后面
 }

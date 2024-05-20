@@ -4,6 +4,7 @@
 
 package entity
 
+
 // Emp is the golang structure for table emp.
 type Emp struct {
 	Id     uint   `json:"id"     orm:"id"      ` // ID
@@ -13,4 +14,5 @@ type Emp struct {
 	Phone  string `json:"phone"  orm:"phone"   ` // 联系电话
 	Email  string `json:"email"  orm:"email"   ` // 邮箱
 	Avatar string `json:"avatar" orm:"avatar"  ` // 照片
+	Dept *Dept	  `json:"dept" orm:"with:id=dept_id"` // 部门
 }
