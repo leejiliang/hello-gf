@@ -107,7 +107,8 @@ func (c *Hello) Db(req *ghttp.Request) {
 		Price       float32
 		PublishTime *gtime.Time
 	}
-	var book *Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
+	//var book *Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
+	var book []Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
 	//var book Book // 非指针类型, 查询不到数据时， error会为： sql: no rows in result set
 	//all, err := model.Page(1, 2).All()
 	err := model.Scan(&book)
