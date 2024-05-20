@@ -9,6 +9,7 @@ import (
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
+	"github.com/gogf/gf/v2/os/gtime"
 	"hello-gf/api/hello"
 )
 
@@ -98,9 +99,20 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//all, err := model.WhereIn("id", g.Array{3, 4, 5}).WhereOr("id", 1).All()
 	//all, err := model.Order("id", "DESC").OrderAsc("price").Group("name").All()
 	//all, err := model.Limit(3, 2).All()
-	all, err := model.Page(1, 2).All()
+
+	type Book struct {
+		Id          int
+		BookName    string `orm:"name"` //orm 标签用于映射类型属性和数据库字段名
+		Author      string `json:"author"`
+		Price       float32
+		PublishTime *gtime.Time
+	}
+	var book *Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
+	//var book Book // 非指针类型, 查询不到数据时， error会为： sql: no rows in result set
+	//all, err := model.Page(1, 2).All()
+	err := model.Scan(&book)
 	if err == nil {
-		req.Response.WriteJson(all)
+		req.Response.WriteJson(book)
 		//req.Response.Writeln(record["name"])
 		//req.Response.Writeln(g.Map{
 		//	"min":   min,
@@ -109,5 +121,7 @@ func (c *Hello) Db(req *ghttp.Request) {
 		//	"count": count,
 		//})
 		//req.Response.Writeln(record[0]["name"])
+	} else {
+		req.Response.Write("错误信息:" + err.Error())
 	}
 }
