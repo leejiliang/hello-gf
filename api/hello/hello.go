@@ -19,3 +19,11 @@ type ParamsRes struct {
 	Password string `json:"password"`
 	Age int `json:"age"`
 }
+
+type ValidReq struct {
+	Username string `p:"username" v:"required"`
+	Password string `p:"password" v:"required"`
+	Age int `p:"age" v:"required|integer|min:0|max:180#Ageb必填|年龄必须是整型|最小值为0|最大值为180"`
+}
+
+type ValidRes struct {}

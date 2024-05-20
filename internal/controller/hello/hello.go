@@ -285,3 +285,8 @@ func (c *Hello) DownloadFile(req *ghttp.Request) {
 	req.Response.ServeFileDownload("/resource/public/music/1.m4a", "myName.m4a") // 区别在于这里回会直接下载, 不会再浏览器中直接打开, 而且可以重命名
 
 }
+
+func (c *Hello) Validate(ctx context.Context, req *hello.ValidReq) (res *hello.ValidRes, err error) {
+
+	return
+}

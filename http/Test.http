@@ -88,3 +88,14 @@ Content-Disposition: form-data; name="file"; filename="小一班-李知闲.m4a"
 < /Users/leejiliang/Downloads/小一班-李知闲.m4a
 
 --WebAppBoundary--
+
+###
+# @name 测试参数验证
+POST {{host}}/user/inner-user/validate
+Content-Type: application/json
+
+{
+  "username": "zhangsan",
+  "password": "123",
+  "age": 200
+}
