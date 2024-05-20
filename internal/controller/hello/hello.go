@@ -99,16 +99,16 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//all, err := model.WhereIn("id", g.Array{3, 4, 5}).WhereOr("id", 1).All()
 	//all, err := model.Order("id", "DESC").OrderAsc("price").Group("name").All()
 	//all, err := model.Limit(3, 2).All()
-	var data = g.Map{
-		"price":        450.2,
-		"publish_time": "2024-05-20",
-	}
+	//var data = g.Map{
+	//	"price":        450.2,
+	//	"publish_time": "2024-05-20",
+	//}
+	////result, err := model.Where(g.Map{
+	////	"author": "无名大侠",
+	////}).Data(data).Update()
 	//result, err := model.Where(g.Map{
 	//	"author": "无名大侠",
-	//}).Data(data).Update()
-	result, err := model.Where(g.Map{
-		"author": "无名大侠",
-	}).Update(data)
+	//}).Update(data)
 	type Book struct {
 		Id          int
 		BookName    string `orm:"name"` //orm 标签用于映射类型属性和数据库字段名
@@ -159,6 +159,8 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//var book Book // 非指针类型, 查询不到数据时， error会为： sql: no rows in result set
 	//all, err := model.Page(1, 2).All()
 	//err := model.Scan(&book)
+	//result, err := model.Delete("id>?", 10)
+	result, err := model.Where("id>?", 9).All()
 	if err == nil {
 		req.Response.WriteJson(result)
 		//req.Response.Writeln(record["name"])
