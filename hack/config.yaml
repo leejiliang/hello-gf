@@ -6,3 +6,8 @@ gfcli:
     build: "-a amd64 -s linux -p temp -ew"
     tagPrefixes:
       - my.image.pub/my-app
+  gen:
+    dao:
+      link: "mysql:hello_gf:Beautiful123@tcp(hello-gf.mysql.polardb.rds.aliyuncs.com:3306)/goframe?loc=Local&parseTime=true"
+      tables: "book,user,emp,dept"
+      jsonCase: "Snake"
