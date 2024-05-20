@@ -95,7 +95,8 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//all, err := model.Where("id<?", 2).All()
 	//all, err := model.WhereLTE("id", 4).WhereGTE("id", 2).All()
 	//all, err := model.WhereIn("id", g.Array{3, 4, 5}).All()
-	all, err := model.WhereIn("id", g.Array{3, 4, 5}).WhereOr("id", 1).All()
+	//all, err := model.WhereIn("id", g.Array{3, 4, 5}).WhereOr("id", 1).All()
+	all, err := model.Order("id", "DESC").OrderAsc("price").Group("name").All()
 	if err == nil {
 		req.Response.WriteJson(all)
 		//req.Response.Writeln(record["name"])
