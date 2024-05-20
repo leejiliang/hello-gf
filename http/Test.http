@@ -77,14 +77,14 @@ GET {{host}}/user/inner-user/one-to-many
 GET {{host}}/user/inner-user/get-book-list
 
 ###
+# @name 上传文件
 # @no-log
 POST {{host}}/user/inner-user/upload-file
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="incomeVerifyAmountData.xlsx"
+Content-Disposition: form-data; name="file"; filename="小一班-李知闲.m4a"
 
-
-< C:\\Users\\e-jiliang.li\\Downloads\\eeee.txt
+< /Users/leejiliang/Downloads/小一班-李知闲.m4a
 
 --WebAppBoundary--

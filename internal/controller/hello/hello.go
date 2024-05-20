@@ -270,5 +270,12 @@ func (c *Hello) UploadFile(req *ghttp.Request) {
 	file := req.GetUploadFile("file")
 	if file != nil {
 		req.Response.Writeln(file)
+		file.Filename = "1.m4a"
+		filename, err := file.Save("resource/public/music")
+		if err != nil {
+			req.Response.Writeln(err)
+		} else {
+			req.Response.Writeln(filename)
+		}
 	}
 }
