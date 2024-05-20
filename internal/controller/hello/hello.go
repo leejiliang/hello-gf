@@ -108,14 +108,42 @@ func (c *Hello) Db(req *ghttp.Request) {
 		PublishTime *gtime.Time
 	}
 
-	data := g.Map{
-		"name":         "go入门实战2",
-		"author":       "无名大侠",
-		"price":        200,
-		"publish_time": "2024-01-03",
+	//data := g.Map{
+	//	//"id":           9,
+	//	"name":         "go入门实战9",
+	//	"author":       "无名大侠",
+	//	"price":        200,
+	//	"publish_time": "2024-01-03",
+	//}
+	data := Book{
+		//"id":           9,
+		BookName: "go入门实战aa",
+		Author:   "无名大侠",
+		Price:    1.0,
+		//PublishTime:     gtime.Now(),
+		PublishTime: gtime.New("2023-09-09"),
 	}
+	//var books = g.Array{
+	//	Book{
+	//		BookName: "go入门实战aa1",
+	//		Author:   "无名大侠",
+	//		Price:    1.0,
+	//		//PublishTime:     gtime.Now(),
+	//		PublishTime: gtime.New("2023-09-09"),
+	//	},
+	//	Book{
+	//		BookName: "go入门实战aa2",
+	//		Author:   "无名大侠",
+	//		Price:    1.0,
+	//		//PublishTime:     gtime.Now(),
+	//		PublishTime: gtime.New("2023-09-10"),
+	//	},
+	//}
 	//result, err := model.Data(data).Insert()
-	result, err := model.Insert(data)
+	//result, err := model.Replace(data)
+	//result, err := model.Insert(data)
+	//result, err := model.Save(books)
+	result, err := model.InsertAndGetId(data)
 
 	//var book *Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
 	//var book []Book // 指针类型, 查询不到数据时， 指针为nil, 没有具体的err信息
