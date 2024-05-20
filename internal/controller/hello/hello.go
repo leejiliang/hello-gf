@@ -265,3 +265,10 @@ func (c *Hello) GetBookList(req *ghttp.Request) {
 	}
 	return
 }
+
+func (c *Hello) UploadFile(req *ghttp.Request) {
+	file := req.GetUploadFile("file")
+	if file != nil {
+		req.Response.Writeln(file)
+	}
+}

@@ -75,3 +75,16 @@ GET {{host}}/user/inner-user/one-to-many
 # @name 查询图书列表
 # @no-log
 GET {{host}}/user/inner-user/get-book-list
+
+###
+# @no-log
+POST {{host}}/user/inner-user/upload-file
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="incomeVerifyAmountData.xlsx"
+
+
+< C:\\Users\\e-jiliang.li\\Downloads\\eeee.txt
+
+--WebAppBoundary--
