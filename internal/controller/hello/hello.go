@@ -6,7 +6,6 @@ package hello
 
 import (
 	"context"
-	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
@@ -89,19 +88,23 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//model := tx.Model("book")
 	//result, err := model.Delete("id>?", 9)
 
-	err := g.DB().Transaction(req.Context(), func(ctx context.Context, tx gdb.TX) error {
-		model := tx.Model("book")
-		result, err := model.Delete("id>", 5)
-		if err == nil {
-			req.Response.Write(result)
-		} else {
-			req.Response.Write(err)
-		}
-		return err
-	})
-	if err != nil {
-		return
-	}
+	//err := g.DB().Transaction(req.Context(), func(ctx context.Context, tx gdb.TX) error {
+	//	model := tx.Model("book")
+	//	result, err := model.Delete("id>", 5)
+	//	if err == nil {
+	//		req.Response.Write(result)
+	//	} else {
+	//		req.Response.Write(err)
+	//	}
+	//	return err
+	//})
+	//if err != nil {
+	//	return
+	//}
+	// 执行原生sql语句
+	//db := g.DB()
+	//db.Query()
+	//db.Exec()
 
 	//record, err := model.One()
 	//record, err := model.Fields("id,name").All()
