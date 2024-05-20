@@ -6,6 +6,7 @@ package hello
 
 import (
 	"context"
+	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
@@ -80,7 +81,28 @@ func (c *Hello) Response(ctx context.Context, req *hello.ParamsReq) (res *hello.
 
 func (c *Hello) Db(req *ghttp.Request) {
 	//req.Response.Writeln(g.Model("book"))
-	model := g.Model("book")
+	//tx, err := g.DB().Begin(req.Context())
+	//if err != nil {
+	//	req.Response.WriteExit("事务开启失败")
+	//}
+	////model := g.Model("book")
+	//model := tx.Model("book")
+	//result, err := model.Delete("id>?", 9)
+
+	err := g.DB().Transaction(req.Context(), func(ctx context.Context, tx gdb.TX) error {
+		model := tx.Model("book")
+		result, err := model.Delete("id>", 5)
+		if err == nil {
+			req.Response.Write(result)
+		} else {
+			req.Response.Write(err)
+		}
+		return err
+	})
+	if err != nil {
+		return
+	}
+
 	//record, err := model.One()
 	//record, err := model.Fields("id,name").All()
 	//record, err := model.Fields("id", "name").All()
@@ -160,18 +182,21 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//all, err := model.Page(1, 2).All()
 	//err := model.Scan(&book)
 	//result, err := model.Delete("id>?", 10)
-	result, err := model.Where("id>?", 9).All()
-	if err == nil {
-		req.Response.WriteJson(result)
-		//req.Response.Writeln(record["name"])
-		//req.Response.Writeln(g.Map{
-		//	"min":   min,
-		//	"max":   max,
-		//	"avg":   avg,
-		//	"count": count,
-		//})
-		//req.Response.Writeln(record[0]["name"])
-	} else {
-		req.Response.Write("错误信息:" + err.Error())
-	}
+	//result, err := model.Where("id>?", 9).All()
+
+	//if err == nil {
+	//	req.Response.WriteJson(result)
+	//	tx.Commit()
+	//	//req.Response.Writeln(record["name"])
+	//	//req.Response.Writeln(g.Map{
+	//	//	"min":   min,
+	//	//	"max":   max,
+	//	//	"avg":   avg,
+	//	//	"count": count,
+	//	//})
+	//	//req.Response.Writeln(record[0]["name"])
+	//} else {
+	//	tx.Rollback()
+	//	req.Response.Write("错误信息:" + err.Error())
+	//}
 }
