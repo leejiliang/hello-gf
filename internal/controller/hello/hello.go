@@ -11,6 +11,7 @@ import (
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gtime"
 	"hello-gf/api/hello"
+	"hello-gf/internal/dao"
 )
 
 type Hello struct {
@@ -202,4 +203,13 @@ func (c *Hello) Db(req *ghttp.Request) {
 	//	tx.Rollback()
 	//	req.Response.Write("错误信息:" + err.Error())
 	//}
+	ctx := dao.Book.Ctx(req.Context())
+	ctx = ctx.WhereGTE("id", 1)
+	ctx = ctx.WhereLTE("id", 3)
+	all, err := ctx.All()
+	if err == nil {
+		req.Response.Writeln(all)
+	} else {
+		req.Response.Write(err)
+	}
 }
