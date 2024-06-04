@@ -2,9 +2,11 @@ package cmd
 
 import (
 	"context"
+	_ "github.com/gogf/gf/contrib/nosql/redis/v2"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"hello-gf/internal/controller/book"
 	"hello-gf/internal/controller/hello"
 	"hello-gf/internal/controller/user"
 )
@@ -47,8 +49,15 @@ var (
 				})
 				group.Bind(
 					user.New(),
+					book.NewBook(),
 					//hello.NewHello(),
 				)
+			})
+
+			s.Group("/book", func(group *ghttp.RouterGroup) {
+				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				group.Bind()
+
 			})
 			s.SetPort(8000, 9000)
 			s.Run()

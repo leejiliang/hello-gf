@@ -76,6 +76,12 @@ GET {{host}}/user/inner-user/one-to-many
 # @no-log
 GET {{host}}/user/inner-user/get-book-list
 
+
+###
+# @name 查询图书列表
+# @no-log
+GET {{host}}/user/add-book
+
 ###
 # @name 上传文件
 # @no-log
