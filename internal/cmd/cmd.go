@@ -60,6 +60,7 @@ var (
 
 			})
 			s.SetPort(8000, 9000)
+			s.EnableHTTPS("/resource/public/key/server.crt", "/resource/public/key/server.key")
 			s.Run()
 			return nil
 		},
